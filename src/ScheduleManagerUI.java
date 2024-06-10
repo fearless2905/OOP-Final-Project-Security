@@ -5,6 +5,7 @@ import java.util.Date;
 
 public class ScheduleManagerUI {
 
+    @SuppressWarnings("deprecation")
     public static void tambahJadwalKustom(ScheduleManager scheduleManager) {
         String guardName = JOptionPane.showInputDialog("Masukkan Nama:");
         if (guardName == null || guardName.isEmpty()) {

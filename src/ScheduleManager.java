@@ -3,6 +3,7 @@ import java.util.List;
 
 public class ScheduleManager {
     private List<Schedule> schedules;
+    @SuppressWarnings("unused")
     private int shiftDuration; // Durasi waktu jaga dalam satuan jam
 
     public ScheduleManager(int shiftDuration) {
@@ -22,6 +23,7 @@ public class ScheduleManager {
         return schedules;
     }
 
+    @SuppressWarnings("deprecation")
     public List<Schedule> getShiftSchedules() {
         List<Schedule> shiftSchedules = new ArrayList<>();
         for (Schedule schedule : schedules) {
