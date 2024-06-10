@@ -1,15 +1,49 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-public class Main {
-    public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
-        }
+public class Main {
+    static ScheduleManager scheduleManager = new ScheduleManager(8);
+    static DefaultTableModel tableModel;
+    static JTable scheduleTable;
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            JFrame frame = new JFrame("Jadwal Tugas Security UPN Veteran Jawa Timur");
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setSize(800, 600);
+            frame.setLayout(new BorderLayout());
+
+            JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+            JButton addButton = new JButton("Tambahkan Jadwal");
+            addButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    ScheduleManagerUI.tambahJadwalKustom(scheduleManager);
+                    ScheduleTableManager.refreshTable(scheduleManager);
+                }
+            });
+            topPanel.add(addButton);
+
+            JPanel centerPanel = new JPanel(new BorderLayout());
+            scheduleTable = new JTable();
+            tableModel = new DefaultTableModel(new Object[]{"Nama", "Lokasi", "Durasi (menit)", "Waktu Mulai", "Waktu Selesai", "Hapus"}, 0);
+            scheduleTable.setModel(tableModel);
+            JScrollPane scrollPane = new JScrollPane(scheduleTable);
+            centerPanel.add(scrollPane, BorderLayout.CENTER);
+
+            ScheduleTableManager.setTableModel(tableModel);
+            ScheduleTableManager.setScheduleTable(scheduleTable);
+
+            frame.add(topPanel, BorderLayout.NORTH);
+            frame.add(centerPanel, BorderLayout.CENTER);
+
+            frame.setVisible(true);
+        });
+    }
+
+    public static void refreshTabelJadwal() {
     }
 }
