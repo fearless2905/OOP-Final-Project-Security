@@ -24,6 +24,7 @@ public class DeleteEditor extends DefaultCellEditor {
         });
     }
 
+    @Override
     public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
         if (isSelected) {
             button.setForeground(table.getSelectionForeground());
@@ -38,19 +39,21 @@ public class DeleteEditor extends DefaultCellEditor {
         return button;
     }
 
+    @Override
     public Object getCellEditorValue() {
         if (isPushed) {
             int response = JOptionPane.showConfirmDialog(null, "Apakah Anda yakin ingin menghapus data ini?", "Konfirmasi", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if (response == JOptionPane.YES_OPTION) {
-                int row = scheduleTable.convertRowIndexToModel(scheduleTable.getEditingRow()); // Konversi indeks baris tampilan ke indeks baris model
+                int editingRow = scheduleTable.getEditingRow();
+                int modelRow = scheduleTable.convertRowIndexToModel(editingRow);
 
                 // Hapus jadwal dari scheduleManager
                 ScheduleManager scheduleManager = Main.scheduleManager;
-                Schedule scheduleToRemove = scheduleManager.getSchedules().get(row);
+                Schedule scheduleToRemove = scheduleManager.getSchedules().get(modelRow);
                 scheduleManager.removeSchedule(scheduleToRemove);
 
                 // Hapus baris dari tabel
-                tableModel.removeRow(row);
+                tableModel.removeRow(modelRow);
 
                 // Refresh table to reset state
                 SwingUtilities.invokeLater(() -> {
@@ -62,11 +65,13 @@ public class DeleteEditor extends DefaultCellEditor {
         return new String(label);
     }
 
+    @Override
     public boolean stopCellEditing() {
         isPushed = false;
         return super.stopCellEditing();
     }
 
+    @Override
     public void fireEditingStopped() {
         super.fireEditingStopped();
     }
