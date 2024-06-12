@@ -15,7 +15,6 @@ public class ScheduleTableManager {
         scheduleTable = table;
     }
 
-    @SuppressWarnings("deprecation")
     public static void refreshTable(ScheduleManager scheduleManager) {
         tableModel.setRowCount(0); // Menghapus semua baris yang ada sebelumnya di tabel
 
