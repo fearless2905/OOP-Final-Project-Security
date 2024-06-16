@@ -37,7 +37,7 @@ public class Main {
             };
             scheduleTable.setModel(tableModel);
             
-            // Menambahkan renderer dan editor untuk tombol hapus
+            //Menambahkan renderer dan editor untuk tombol hapus
             JScrollPane scrollPane = new JScrollPane(scheduleTable);
             centerPanel.add(scrollPane, BorderLayout.CENTER);
 
@@ -54,4 +54,3 @@ public class Main {
     public static void refreshTabelJadwal() {
     }
 }
-

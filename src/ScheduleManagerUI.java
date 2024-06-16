@@ -57,7 +57,7 @@ public class ScheduleManagerUI {
             Date startTime = (Date) startTimeSpinner.getValue();
             Date startDate = (Date) dateSpinner.getValue();
 
-            // Set tanggal mulai yang dimasukkan pengguna ke waktu yang dipilih pada J
+            // Set tanggal mulai yang dimasukkan pengguna ke waktu yang dipilih pada Jspinner
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(startDate);
             calendar.set(Calendar.HOUR_OF_DAY, startTime.getHours());
@@ -72,5 +72,9 @@ public class ScheduleManagerUI {
             Employee employee = new SecurityGuard(guardName, location);
             scheduleManager.addSchedule(new Schedule(startTime, employee, endTime));
         }
+    }
+
+    public static void editJadwalKustom(ScheduleManager scheduleManager, String name, String location, int duration,
+            String startTimeStr, int row) {
     }
 }
